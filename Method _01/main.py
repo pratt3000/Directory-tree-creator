@@ -22,9 +22,23 @@ tree = {
     node_info['F6']['id']: {'children':[]},
 }
 
+# function to display tree
 def display_tree(tree):
     for i in range(len(node_info.keys())):
         print(list(node_info.keys())[i], " :: ", tree[node_info[list(node_info.keys())[i]]['id']]['children'])
+
+# function to add folder in the tree
+def add_folder(node_name, parent_name):
+    # create unique id for node
+    node_info[node_name] = {'id': uuid.uuid4()}
+
+    # create empty list as there are no children for newly created nodes
+    tree[node_info[node_name]['id']] = {'children':[]}
+
+    # add node to the parent's children
+    tree[node_info[parent_name]['id']]['children'].append(node_name)
+
+
 
 def main():
     continue_loop = True
@@ -36,13 +50,19 @@ def main():
         print('5. Print tree')
         print('0. EXIT')
         
+        print('Choice : ', end='')
         choice_opted = int(input())
-        if choice_opted == 0:
+        
+        if choice_opted == 0:           # break loop
             continue_loop = False
-        elif choice_opted == 1:
+        elif choice_opted == 1:         # add folder
             print('Enter Node Name : ', end='')
-            new_node_name = str(input())
-        elif choice_opted == 5:
+            new_node = str(input())
+            print('Enter Parent Node Name : ', end='')
+            parent_node = str(input())
+            add_folder(new_node, parent_node)
+
+        elif choice_opted == 5:         # print full tree
             print('############################# TREE ##############################')
             display_tree(tree)
             
