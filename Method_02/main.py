@@ -4,7 +4,7 @@ import uuid
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
-UNI_COUNT = 110
+# UNI_COUNT = 110
 
 def main():
     continue_loop = True
@@ -27,10 +27,8 @@ def main():
             new_folder = str(input())
             print('Enter Path (eg : root/F1/F4/) : ', end='')
             path_ = str(input())
-            path_list = list(filter(None, path_.split('/')))
-            global UNI_COUNT
-            UNI_COUNT = UNI_COUNT+1
-            add_folder(new_folder,tree, path_list, UNI_COUNT)
+            path_list = list(filter(None, path_.split('/'))) # split path to  list of folders in the same order
+            add_folder(new_folder,tree, path_list, str(uuid.uuid4()))
 
         elif choice_opted == 2:
             print('Enter Path (eg : root/F1/F4/) : ', end='')

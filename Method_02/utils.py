@@ -3,22 +3,22 @@ import uuid
 # initialize a sample tree structure
 tree = {'root':{'children':{'F1':{
                                 'children':{
-                                            'F4':{'children':{}, 'id':104,'parent':'F1'}, 
-                                            'F5':{'children':{}, 'id':105, 'parent':'F1'}
+                                            'F4':{'children':{}, 'id':str(uuid.uuid4()),'parent':'F1'}, 
+                                            'F5':{'children':{}, 'id':str(uuid.uuid4()), 'parent':'F1'}
                                             },
-                                'id':101,
+                                'id':str(uuid.uuid4()),
                                 'parent':'root'
                                 },
-                            'F2':{'children':{}, 'id':102, 'parent':'root'},
+                            'F2':{'children':{}, 'id':str(uuid.uuid4()), 'parent':'root'},
                             'F3':{
                                 'children':{
-                                            'F6':{'children':{}, 'id':106, 'parent':'F3'}
+                                            'F6':{'children':{}, 'id':str(uuid.uuid4()), 'parent':'F3'}
                                             },
-                                'id':103,
+                                'id':str(uuid.uuid4()),
                                 'parent':'root'
                                 }
                             },
-                'id': 100,
+                'id': str(uuid.uuid4()),
                 'parent': 'NaN'
                 }
 }
@@ -99,6 +99,7 @@ def rename_node(tree, folder_name, dict_keys, folder_new_name):
                 temp = tree[fold]
                 del tree[fold]
                 tree[folder_new_name] = temp
+                print("FOLDER HAS BEEN RENAMED")
             
             # recursion
             rename_node(tree[fold]['children'], folder_name, tree[fold]['children'].keys(), folder_new_name)
