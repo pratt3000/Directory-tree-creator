@@ -26,7 +26,7 @@ tree = {
 def display_tree(tree):
     for i in range(len(node_info.keys())):
         print(list(node_info.keys())[i], " :: ", tree[node_info[list(node_info.keys())[i]]['id']]['children'])
-
+        
 # function to add folder in the tree
 def add_folder(node_name, parent_name):
     # create unique id for node
@@ -58,17 +58,43 @@ def delete_node(node_name):
 
 # function to get path of a particular node
 def fetch_node_path(node_name):
+    #init
     temp_node = node_name
     node_path = [temp_node]
 
+    # go from child to root
     while(temp_node != 'root'):
         temp_node = tree[node_info[temp_node]['id']]['parent']
         node_path.append(temp_node)
     
+    # print path
     node_path.reverse()
     path = "/".join(node_path)
     print("PATH :: ", path)
 
+# function to rename node
+def rename_node(node_name_old, node_name_new):
+
+    # Rename child in it's parent's children list
+    parent_node = tree[node_info[node_name_old]['id']]['parent']
+    children_of_parent_node = tree[node_info[parent_node]['id']]['children']
+    renamed_children_list = [node_name_new if x==node_name_old else x for x in children_of_parent_node]
+    tree[node_info[parent_node]['id']]['children'] = renamed_children_list
+
+    # Rename parent in its children's parent attribute
+    nodes_children = tree[node_info[node_name_old]['id']]['children']
+    for node in nodes_children:
+        tree[node_info[node]['id']]['parent'] = node_name_new
+
+    # Rename key in tree
+    node_tree_temp = tree[node_info[node_name_old]['id']]
+    tree.pop(node_info[node_name_old]['id'])
+    tree[node_info[node_name_old]['id']] = node_tree_temp  # can use old uuid since it remains same
+
+    # Rename key in node_info
+    node_info_temp = node_info[node_name_old]
+    node_info.pop(node_name_old)
+    node_info[str(node_name_new)] = node_info_temp
 
 def main():
     continue_loop = True
@@ -99,6 +125,12 @@ def main():
             print('Enter Node Name: ', end='')
             node_name = str(input())
             fetch_node_path(node_name)
+        elif choice_opted == 4:
+            print('Enter Node Name (OLD): ', end='')
+            node_name_old = str(input())
+            print('Enter Node Name (NEW): ', end='')
+            node_name_new = str(input())
+            rename_node(node_name_old, node_name_new)
 
         elif choice_opted == 5:         # print full tree
             print('############################# TREE ##############################')
