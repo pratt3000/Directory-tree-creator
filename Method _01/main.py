@@ -56,6 +56,18 @@ def delete_node(node_name):
     tree.pop(node_info[node_name]['id'])
     node_info.pop(node_name)
 
+# function to get path of a particular node
+def fetch_node_path(node_name):
+    temp_node = node_name
+    node_path = [temp_node]
+
+    while(temp_node != 'root'):
+        temp_node = tree[node_info[temp_node]['id']]['parent']
+        node_path.append(temp_node)
+    
+    node_path.reverse()
+    path = "/".join(node_path)
+    print("PATH :: ", path)
 
 
 def main():
@@ -83,6 +95,10 @@ def main():
             print('Enter Node Name : ', end='')
             node_name = str(input())
             delete_node(node_name)
+        elif choice_opted == 3:
+            print('Enter Node Name: ', end='')
+            node_name = str(input())
+            fetch_node_path(node_name)
 
         elif choice_opted == 5:         # print full tree
             print('############################# TREE ##############################')
