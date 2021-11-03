@@ -14,6 +14,9 @@ Also upload the program on github and share the link with README.
 1. pip install binarytree 
 
 
-# Cases handled
-1. Ord
+# Edge cases
+Edge case 1 - folders with same names, so for now folders should be uniquely named
+soln - could change the whole structure to nested dicts
+
+
 

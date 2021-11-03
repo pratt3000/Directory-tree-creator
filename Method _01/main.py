@@ -13,13 +13,13 @@ node_info = {'root': {'id': uuid.uuid4()},
 
 # Defines structure of predefined tree
 tree = {
-    node_info['root']['id']: {'children': ['F1', 'F2', 'F3']},
-    node_info['F1']['id']: {'children': ['F4', 'F5']},
-    node_info['F2']['id']: {'children': []},
-    node_info['F3']['id']: {'children': ['F6']},
-    node_info['F4']['id']: {'children': []},
-    node_info['F5']['id']: {'children':[]},
-    node_info['F6']['id']: {'children':[]},
+    node_info['root']['id']: {'children': ['F1', 'F2', 'F3'], 'parent': 'NaN'},
+    node_info['F1']['id']: {'children': ['F4', 'F5'], 'parent': 'root'},
+    node_info['F2']['id']: {'children': [], 'parent': 'root'},
+    node_info['F3']['id']: {'children': ['F6'], 'parent': 'root'},
+    node_info['F4']['id']: {'children': [], 'parent': 'F1'},
+    node_info['F5']['id']: {'children':[], 'parent': 'F1'},
+    node_info['F6']['id']: {'children':[], 'parent': 'F3'},
 }
 
 # function to display tree
@@ -33,10 +33,28 @@ def add_folder(node_name, parent_name):
     node_info[node_name] = {'id': uuid.uuid4()}
 
     # create empty list as there are no children for newly created nodes
-    tree[node_info[node_name]['id']] = {'children':[]}
+    tree[node_info[node_name]['id']] = {'children':[], 'parent': parent_name}
 
     # add node to the parent's children
     tree[node_info[parent_name]['id']]['children'].append(node_name)
+
+# function to delete folder from the tree
+def delete_node(node_name):
+
+    # recursively delete child nodes
+    while len(tree[node_info[node_name]['id']]['children']) != 0:
+        temp_node_name = tree[node_info[node_name]['id']]['children'][0]
+        delete_node(temp_node_name)
+
+    # get it's parent node
+    parent_node = tree[node_info[node_name]['id']]['parent']
+
+    # delete from child list
+    tree[node_info[parent_node]['id']]['children'].remove(node_name)
+
+    # erase node existence
+    tree.pop(node_info[node_name]['id'])
+    node_info.pop(node_name)
 
 
 
@@ -61,6 +79,10 @@ def main():
             print('Enter Parent Node Name : ', end='')
             parent_node = str(input())
             add_folder(new_node, parent_node)
+        elif choice_opted == 2:
+            print('Enter Node Name : ', end='')
+            node_name = str(input())
+            delete_node(node_name)
 
         elif choice_opted == 5:         # print full tree
             print('############################# TREE ##############################')
