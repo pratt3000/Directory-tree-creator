@@ -21,6 +21,7 @@ def main():
         
         if choice_opted == 0:           # break loop
             continue_loop = False
+
         elif choice_opted == 1:         # add folder
             print('Enter new Folder Name : ', end='')
             new_folder = str(input())
@@ -31,20 +32,25 @@ def main():
             UNI_COUNT = UNI_COUNT+1
             add_folder(new_folder,tree, path_list, UNI_COUNT)
 
-        # elif choice_opted == 2:
-        #     print('Enter Node Name : ', end='')
-        #     node_name = str(input())
-        #     delete_node(node_name)
-        # elif choice_opted == 3:
-        #     print('Enter Node Name: ', end='')
-        #     node_name = str(input())
-        #     fetch_node_path(node_name)
-        # elif choice_opted == 4:
-        #     print('Enter Node Name (OLD): ', end='')
-        #     node_name_old = str(input())
-        #     print('Enter Node Name (NEW): ', end='')
-        #     node_name_new = str(input())
-        #     rename_node(node_name_old, node_name_new)
+        elif choice_opted == 2:
+            print('Enter Path (eg : root/F1/F4/) : ', end='')
+            path_ = str(input())
+            path_list = list(filter(None, path_.split('/')))
+            delete_folder(tree, path_list)
+
+        elif choice_opted == 3:
+            print('Enter Node name: ', end='')
+            node_name = str(input())
+            get_address(tree, node_name, ['root'],[])
+
+        elif choice_opted == 4:
+            print('Enter Node Name (OLD): ', end='')
+            node_name_old = str(input())
+            print('Enter Node Name (NEW): ', end='')
+            node_name_new = str(input())
+            rename_node(tree, node_name_old, ['root'], node_name_new)
+
+
         elif choice_opted == 5:         # print full tree
             print('############################# TREE ##############################')
             pp.pprint(tree)
