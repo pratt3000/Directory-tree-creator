@@ -4,7 +4,6 @@ import uuid
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
-# UNI_COUNT = 110
 
 def main():
     continue_loop = True
@@ -52,6 +51,9 @@ def main():
         elif choice_opted == 5:         # print full tree
             print('############################# TREE ##############################')
             pp.pprint(tree)
+        else:
+            print('you chose the wrong option')
+            continue_loop=True
             
 
 main()
