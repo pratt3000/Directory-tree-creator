@@ -33,11 +33,12 @@ Edge case 1 - All folders must be uniquely named <br>
 soln - could change the whole structure to nested dicts
 
 ### Method_02
-Used a single more elegant data structure/
-Assumption - currently printing the first folder which is found in tree, for the fetch method.
-Alternatives:
+Used a single more elegant data structure. <br>
+Assumption - 
+Fetch Method : Currently printing the first folder which is found in tree.<br>
+Potential solutions:
 1. Pass id along ith name and find the specific folder.
-2. Find all foler having that name instead of the first.
+2. Find all folder having that name instead of the first.
 
 
 

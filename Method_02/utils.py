@@ -19,7 +19,7 @@ tree = {'root':{'children':{'F1':{
                                 }
                             },
                 'id': str(uuid.uuid4()),
-                'parent': 'NaN'
+                'parent': 'N.A.'
                 }
 }
 
@@ -30,7 +30,6 @@ tree = {'root':{'children':{'F1':{
 # path_list - path where the folder needs to be added
 # unique id of the folder
 # parent - arbitrary parent value gets set according to which stage of recursion we are on.
-
 def add_folder(new_folder_name, tree, path_list, id, parent='NaN'):
     try:
         # until we reach the end of path, rcursive function keeps getting called
@@ -63,7 +62,6 @@ def delete_folder(tree, path_list):
 # folder_name - folder to find
 # dict_keys - by default set to 'root'
 # path_list - arbitrary path list gets maintained as we traverse the tree.
-
 def get_address(tree, folder_name, dict_keys, path_list):
     try:
         dict_keys = list(dict_keys)
